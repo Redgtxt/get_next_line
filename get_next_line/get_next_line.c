@@ -1,15 +1,5 @@
-//#include "get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-
-#ifndef SIZE
-#define SIZE 1
-#endif
-   // printf("bytesRead: %zu\n",bytesRead);
-        // printf("Buffer %s\n",buffer);
-        //Funcao que passa o conteudo do buffer para o pointer
+#include "get_next_line.h"
+/*
 char	*get_next_line(int fd)
 {
     static char buffer[SIZE];
@@ -20,7 +10,7 @@ char	*get_next_line(int fd)
 
     ptr = NULL;
     bytesRead = 1;
-    ptr = malloc(SIZE * sizeof(char));
+    ptr = ft_calloc(SIZE + 1 , sizeof(char));
     if(!ptr)
         return NULL;
 
@@ -50,31 +40,77 @@ char	*get_next_line(int fd)
     free(ptr);
     return NULL;
 }
+*/
 
-// char fill_buffer(char *buffer)
-// {
-//     while(*buffer != '\0' || *buffer != '\n')
-//     {
-//         if(*buffer != buffer)
-//         *buffer++;
-//     }
+void    print_newline_helper(char *buffer)
+{
 
-// }
+    while (*buffer &&  *buffer != '\0')
+    {
+        if (*buffer == '\n')
+        {
+            *buffer= '\\';
+        }
+        printf("%c",*buffer);
+        buffer++;
+    }
+}
+
+
+static char *read_from_file(int fd)
+{
+    int bytesRead;
+     char *buffer;
+     static int count = 1;
+
+
+    printf("ft_calloc#[%d]---", count++);
+    buffer = ft_calloc(BUFFER_SIZE + 1,sizeof(char));
+    if(!buffer)
+        return NULL;
+    bytesRead = read(fd,buffer,BUFFER_SIZE);
+    print_newline_helper(buffer);
+    if(bytesRead <= 0)
+    {
+        free(buffer);
+        return NULL;
+    }
+
+    return buffer;
+}
+
+char	*get_next_line(int fd)
+{
+    char *buffer;
+
+    buffer = read_from_file(fd);
+    return buffer;
+}
 int	main(void)
 {
-	int		fd;
-	char	*line;
+int    fd;
+  char  *line;
+  int  count;
 
-
-	// Abre o arquivo "file.txt" para leitura
-	fd = open("file.txt", O_RDONLY);
+  count = 0;
+  fd = open("file.txt", O_RDONLY);
+  if(fd == -1)
+  {
+    printf("Erro a abrir o ficheiro");
+    return 1;
+  }
+  while(1)
+  {
     line = get_next_line(fd);
-	// Lê uma linha por vez e imprime na saída padrão
-		printf("%s\n", line);
-
-
-	// Fecha o arquivo
-	close(fd);
+    if(line == NULL)
+        break;
+    count++;
+    printf("[%d]:%s\n", count, line); //count is to show you the line numbers
     free(line);
-	return (0);
+    line = NULL;
+  }
+
+
+  close(fd);
+  return (0);
 }
