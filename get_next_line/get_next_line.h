@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE 30
+#define BUFFER_SIZE 3
 #endif
 
 void	*ft_memset(void *str, int c, size_t n);
