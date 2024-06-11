@@ -6,7 +6,7 @@
 /*   By: hguerrei < hguerrei@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 09:45:55 by hguerrei          #+#    #+#             */
-/*   Updated: 2024/06/11 13:41:56 by hguerrei         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:38:40 by hguerrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t	ft_strlen(const char *s)
 
 	i = 0;
 	if (!s)
-		return (0);	
+		return (0);
 	while (s[i] != '\0')
 	{
 		if (s[i] == '\n')
@@ -56,4 +56,22 @@ char	*ft_strjoin(char *s1, char const *s2)
 	newStr[i] = '\0';
 	return (newStr);
 }
+int	flagfunc(char *buffer)
+{
+	int	i;
+	int	j;
+	int	flag;
 
+	i = 0;
+	j = 0;
+	flag= 0;
+	while (buffer[j] != '\0')
+	{
+		if (flag == 1)
+			buffer[i++] = buffer[j];
+		if (buffer[j] == '\n')
+			flag = 1;
+		buffer[j++] = '\0';
+	}
+	return (flag);
+}

@@ -6,31 +6,13 @@
 /*   By: hguerrei < hguerrei@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 16:05:17 by hguerrei          #+#    #+#             */
-/*   Updated: 2024/06/11 14:22:02 by hguerrei         ###   ########.fr       */
+/*   Updated: 2024/06/11 14:38:34 by hguerrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	flagfunc(char *buffer)
-{
-	int	i;
-	int	j;
-	int	flag;
 
-	i = 0;
-	j = 0;
-	flag= 0;
-	while (buffer[j] != '\0')
-	{
-		if (flag == 1)
-			buffer[i++] = buffer[j];
-		if (buffer[j] == '\n')
-			flag = 1;
-		buffer[j++] = '\0';
-	}
-	return (flag);
-}
 
 char	*get_next_line(int fd)
 {
