@@ -1,31 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hguerrei < hguerrei@student.42lisboa.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/11 09:45:55 by hguerrei          #+#    #+#             */
+/*   Updated: 2024/06/11 13:41:56 by hguerrei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "get_next_line.h"
 
-void	*ft_memset(void *str, int c, size_t n)
-{
-	size_t			i;
-	unsigned char	*p;
 
-	p = (unsigned char *)str;
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
 	i = 0;
-	while (i < n)
+	if (!s)
+		return (0);	
+	while (s[i] != '\0')
 	{
-		p[i] = (unsigned char)c;
+		if (s[i] == '\n')
+			return (i + 1);
 		i++;
 	}
-	return (str);
-}
-void	ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, 0, n);
+	return (i);
 }
 
-void	*ft_calloc(size_t n, size_t size)
+char	*ft_strjoin(char *s1, char const *s2)
 {
-	void	*ptr;
+	char			*newStr;
+	unsigned int	i;
+	unsigned int	j;
 
-	ptr = malloc(n * size);
-	if (ptr == NULL)
+	i = 0;
+	newStr = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!newStr)
 		return (NULL);
-	ft_bzero(ptr, n * size);
-	return (ptr);
+	while (s1 && s1[i] != '\0')
+	{
+		newStr[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	free(s1);
+	while (s2[j] != '\0' && s2 != NULL)
+	{
+		newStr[i++] = s2[j++];
+		if (s2[j - 1] == '\n')
+			break ;
+	}
+	newStr[i] = '\0';
+	return (newStr);
 }
+
