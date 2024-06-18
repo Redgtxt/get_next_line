@@ -6,7 +6,7 @@
 /*   By: hguerrei < hguerrei@student.42lisboa.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 09:45:46 by hguerrei          #+#    #+#             */
-/*   Updated: 2024/06/12 09:20:28 by hguerrei         ###   ########.fr       */
+/*   Updated: 2024/06/18 09:32:53 by hguerrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1
 # endif
 
 char	*ft_strjoin(char *s1, char const *s2);
